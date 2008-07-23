@@ -6,7 +6,7 @@
 require 'rubygems'
 require 'net/http'
 require 'activesupport'
-
+LAST_FM_KEY = ''
 class LastFM
   attr_reader :url
   def initialize
@@ -39,7 +39,11 @@ class LastFM::Track < LastFM
   end
 end
 
-
+lfm = LastFM::Track.new
+res = lfm.search('believe')
+res.each do |t| 
+  p t['name']
+end
 
 
 
