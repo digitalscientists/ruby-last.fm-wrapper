@@ -1,6 +1,5 @@
 require 'lib/last_fm'
-
 lfm = LastFM.new()
-res = lfm.user.getlovedtracks(:user=>'christwoism')
+res = lfm.artist.search(:artist=>'cher')
 p res
 

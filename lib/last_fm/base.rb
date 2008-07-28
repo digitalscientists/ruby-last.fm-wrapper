@@ -1,4 +1,5 @@
 class LastFM
+  include LastFM::Meta  
   attr_reader :url
   def initialize 
     cnf  = YAML.load_file'lfm.yml'
@@ -17,9 +18,7 @@ class LastFM
   
   def lfm_query method,params
     klass = self.class.to_s.gsub("LastFM::","").downcase
-    url = "#{@url}method=#{klass}.#{method}&#{params.to_query}"    
-    puts url
-    url
+    "#{@url}method=#{klass}.#{method}&#{params.to_query}"    
   end
   
   def album() @track            ||= Album.new() end
