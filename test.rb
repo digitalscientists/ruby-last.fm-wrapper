@@ -1,6 +1,6 @@
-require 'last_fm'
-lfm = LastFM::Track.new('lfm.yml')
-res = lfm.search('believe')
+require 'lib/last_fm'
+lfm = LastFM.new()
+res = lfm.track.search('redline')
 res.each do |t| 
   p t['name']
 end
