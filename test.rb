@@ -1,6 +1,6 @@
 require 'lib/last_fm'
 
 lfm = LastFM.new()
-res = lfm.track.search(:track=>'redline')
+res = lfm.user.getlovedtracks(:user=>'christwoism')
 p res
 
