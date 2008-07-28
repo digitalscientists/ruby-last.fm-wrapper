@@ -6,11 +6,11 @@
 require 'rubygems'
 require 'net/http'
 require 'activesupport'
-LAST_FM_KEY = ''
 class LastFM
   attr_reader :url
-  def initialize
-    @url = "http://ws.audioscrobbler.com/2.0/?api_key=#{LAST_FM_KEY}&"
+  def initialize cnf_path
+    cnf = YAML.load_file cnf_path
+    @url = "http://ws.audioscrobbler.com/2.0/?api_key=#{cnf['LAST_FM_KEY']}&"
   end
   def do_request uri
     begin
@@ -25,27 +25,16 @@ class LastFM
 end
 
 class LastFM::Artist < LastFM
-  def search query,page=1,limit=20
+  def search query,page=1,limit=10
     qs = "method=artist.search&artist=#{query}&page=#{page}&limit=#{limit}"
     resp = do_request url+qs
     resp['results']['artistmatches']['artist'] rescue []
   end
 end
 class LastFM::Track < LastFM
-  def search query,page=1,limit=20
+  def search query,page=1,limit=10
     qs = "method=track.search&track=#{query}&page=#{page}&limit=#{limit}"
     resp = do_request url+qs
     resp['results']['trackmatches']['track'] rescue []
   end
 end
-
-lfm = LastFM::Track.new
-res = lfm.search('believe')
-res.each do |t| 
-  p t['name']
-end
-
-
-
-
-
