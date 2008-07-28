@@ -4,3 +4,9 @@ A ruby wrapper in it's beginning stages for the Last.fm API. Mostly a learning e
 
 http://www.last.fm/api
 
+Examples:
+
+  lfm = LastFM.new()
+  tracks  = lfm.track.search(:track=>'redline')
+  similar = lfm.artist.getSimilar(:artist=>'radiohead',:limit=>5)
+  loved   = lfm.user.getLoved(:user=>'myuser')
