@@ -15,7 +15,20 @@ class LastFM
     end
   end
   
-  def track() @track ||= Track.new() end
-  def artist() @artist ||= Artist.new() end
+  def lfm_query method,params
+    "#{@url}method=artist.#{method}&#{params.to_query}"    
+  end
+  
+  def album() @track            ||= Album.new() end
+  def artist() @artist          ||= Artist.new() end
+  def event() @event            ||= Event.new() end
+  def geo() @geo                ||= Geo.new() end
+  def group() @group            ||= Group.new() end
+  def library() @library        ||= Library.new() end
+  def playlist() @playlist      ||= Playlist.new() end
+  def tag() @tag                ||= Tag.new() end
+  def tastometer() @tastometer  ||= Tastometer.new() end
+  def track() @track            ||= Track.new() end
+  def user() @user              ||= User.new() end
   
 end
