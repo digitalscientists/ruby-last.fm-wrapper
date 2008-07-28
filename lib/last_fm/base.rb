@@ -1,9 +1,3 @@
-# lfm = LastFM::Track.new
-# res = lfm.search('believe')
-# res.each do |t| 
-#   p t['name']
-# end
-
 class LastFM
   attr_reader :url
   def initialize 
