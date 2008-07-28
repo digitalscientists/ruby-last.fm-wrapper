@@ -6,10 +6,10 @@ class LastFM
   end
   def do_request uri
     begin
-      url  = URI.parse(uri)
-      req  = Net::HTTP::Get.new(url.path+"?"+url.query)
+      url       = URI.parse(uri)
+      req       = Net::HTTP::Get.new(url.path+"?"+url.query)
       @response = Net::HTTP.start(url.host, url.port) {|http| http.request(req) }
-      result = XmlSimple.xml_in(@response.body, 'keeproot' => false, 'forcearray' => false)
+      result    = XmlSimple.xml_in(@response.body, 'keeproot' => false, 'forcearray' => false)
     rescue
      puts "Request failed for #{uri}"
     end
