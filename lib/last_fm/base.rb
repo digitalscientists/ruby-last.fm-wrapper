@@ -2,10 +2,10 @@ class LastFM
   include LastFM::Meta  
   attr_reader :url
   def initialize 
-    cnf  = YAML.load_file'lfm.yml'
-    @url = "http://ws.audioscrobbler.com/2.0/?api_key=#{cnf['LAST_FM_KEY']}&"
+    @@cnf  = YAML.load_file 'lfm.yml'
+    @@url = "http://ws.audioscrobbler.com/2.0/?api_key=#{@@cnf['LAST_FM_KEY']}&"
   end
-  def do_request uri
+  def get uri
     begin
       url       = URI.parse(uri)
       req       = Net::HTTP::Get.new(url.path+"?"+url.query)
@@ -18,7 +18,7 @@ class LastFM
   
   def lfm_query method,params
     klass = self.class.to_s.gsub("LastFM::","").downcase
-    "#{@url}method=#{klass}.#{method}&#{params.to_query}"    
+    "#{@@url}method=#{klass}.#{method}&#{params.to_query}"    
   end
   
   def album() @track            ||= Album.new() end
